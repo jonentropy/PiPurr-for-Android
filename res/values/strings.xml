@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">The Cats!</string>
+    <string name="get_image">What are they up to?</string>
+    <string name="no_internet">No Internet connection litty!</string>
+    <string name="cat_image_desc">Cat Image</string>
+    <string name="share_string">"Show people the cats!"</string>
+    <string name="error_sharing">"Couldn't share the cats. :("></string>
+
+</resources>
