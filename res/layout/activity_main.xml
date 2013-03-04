@@ -15,19 +15,6 @@
         android:longClickable="true"
         android:layout_below="@+id/error_text" />
 
-    <ProgressBar
-        android:id="@+id/progressBar1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/error_text"
-        android:max="100"
-        android:paddingLeft="@dimen/bar_pad"
-        android:paddingRight="@dimen/bar_pad"
-        android:visibility="invisible" />
-
     <TextView
         android:id="@+id/error_text"
         android:layout_width="wrap_content"
@@ -48,5 +35,13 @@
         android:layout_marginTop="14dp"
         android:onClick="doClick"
         android:text="@string/get_image" />
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" 
+        android:visibility="invisible" />
 
 </RelativeLayout>
