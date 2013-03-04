@@ -1,4 +1,4 @@
-package org.canthack.tris.catcam;
+package org.canthack.tris.pipurr.client;
 //Based on Chapter 11 of the book Pro Android 3
 
 import java.io.IOException;
@@ -10,8 +10,6 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
-
-import com.talsockettest.R;
 
 import android.app.Activity;
 import android.content.Context;

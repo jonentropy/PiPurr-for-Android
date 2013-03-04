@@ -1,4 +1,4 @@
-package org.canthack.tris.catcam;
+package org.canthack.tris.pipurr.client;
 //Taken from the book Pro Android 3
 
 import org.apache.http.HttpVersion;
