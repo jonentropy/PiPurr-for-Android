@@ -1,7 +1,14 @@
-CatCamViewer
-============
+PiPurr for Android
+==================
 
-Simple image viewer for Android. Works with the CatCamServer repo to pull image from a webcam into the app.
+PiPurr client for Android.
 
-Allows sharing of the image via the Intent system.
+See PiPurr Server repo for the server.
 
+Features:
+* Share via sharing intent.
+
+Coming soon:
+* optimise sharing.
+* video feed.
+* cat interaction.
