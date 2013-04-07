@@ -92,7 +92,6 @@ public class PiPurrMain extends Activity {
 
 			break;
 		case R.id.imageView1:
-			//((ImageView) view).set
 			break;
 
 		case R.id.button1:
