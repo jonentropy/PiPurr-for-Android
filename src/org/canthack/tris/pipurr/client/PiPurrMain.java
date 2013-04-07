@@ -41,87 +41,102 @@ public class PiPurrMain extends Activity {
 			if(diTask.getStatus() == AsyncTask.Status.FINISHED)
 				diTask.setImageInView();
 		}
-		
+
 		ImageView catImage = (ImageView)this.findViewById(R.id.imageView1);
-		
+
 		catImage.setOnLongClickListener(new OnLongClickListener() { 
-	        @Override
-	        public boolean onLongClick(View v) {
-	            return doShare(v);
-	        }
-	    });
+			@Override
+			public boolean onLongClick(View v) {
+				return doShare(v);
+			}
+		});
 	}
 
 	public void doClick(View view) {
-		TextView err = (TextView)this.findViewById(R.id.error_text);
-		err.setText("");
-		
-		if(diTask != null) {
-			AsyncTask.Status diStatus = diTask.getStatus();
-			Log.v("doClick", "diTask status is " + diStatus);
-			if(diStatus != AsyncTask.Status.FINISHED) {
-				Log.v("doClick", "... no need to start a new task");
-				return;
+
+		switch(view.getId()){
+		case R.id.button2:
+			TextView err = (TextView)this.findViewById(R.id.error_text);
+			err.setText("");
+
+			if(diTask != null) {
+				AsyncTask.Status diStatus = diTask.getStatus();
+				Log.v("doClick", "diTask status is " + diStatus);
+				if(diStatus != AsyncTask.Status.FINISHED) {
+					Log.v("doClick", "... no need to start a new task");
+					return;
+				}
+				// Since diStatus must be FINISHED, we can try again.
 			}
-			// Since diStatus must be FINISHED, we can try again.
-		}
 
-		ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+			ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 
-		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-		
-		boolean isConnected = !(activeNetwork == null) && activeNetwork.isConnectedOrConnecting();
+			NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 
-		if(!isConnected){
-			Toast.makeText(getApplicationContext(), this.getString(R.string.no_internet), Toast.LENGTH_LONG).show();
-		}
-		else{
-			diTask = new ImageDownloadTask(this);
+			boolean isConnected = !(activeNetwork == null) && activeNetwork.isConnectedOrConnecting();
 
-			try{
-				diTask.execute(getResources().getString(R.string.image_url));
+			if(!isConnected){
+				Toast.makeText(getApplicationContext(), this.getString(R.string.no_internet), Toast.LENGTH_LONG).show();
 			}
-			catch(Exception e){
-				e.printStackTrace();
-				err.setText(getResources().getString(R.string.error_sharing) + "\n" + e.getMessage());
-				err.setText(e.getMessage());
+			else{
+				diTask = new ImageDownloadTask(this);
+
+				try{
+					diTask.execute(getResources().getString(R.string.image_url));
+				}
+				catch(Exception e){
+					e.printStackTrace();
+					err.setText(e.getMessage());
+				}
 			}
+
+			break;
+		case R.id.imageView1:
+			//((ImageView) view).set
+			break;
+
+		case R.id.button1:
+			GetUrlTask ut = new GetUrlTask();
+			ut.execute(getResources().getString(R.string.meow_url));
+			break;
 		}
 	}
-	
+
 	public boolean doShare(View view){
 		ImageView catView = (ImageView)view;
 		if(catView.getDrawable() == null){
 			//no image in the view, so makes no sense to share
 			return false;
 		}
-				
+
 		catView.setDrawingCacheEnabled(true);
 		Bitmap catBitmap = (catView.getDrawingCache());
-		
+
 		Intent shareIntent = new Intent(Intent.ACTION_SEND);
 		shareIntent.setType("image/jpeg");
-		
+
 		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 		catBitmap.compress(Bitmap.CompressFormat.JPEG, 95, bytes);
-		
+
 		String filePath = getBaseContext().getExternalFilesDir(null) + 
 				File.separator + "The Cats.jpg";
-		
+
 		File f = new File(filePath);
 		try {
 			f.createNewFile();
-		    f.deleteOnExit();
-		    FileOutputStream fos = new FileOutputStream(f);
-		    fos.write(bytes.toByteArray());
-		    fos.close();
-		    
+			f.deleteOnExit();
+			FileOutputStream fos = new FileOutputStream(f);
+			fos.write(bytes.toByteArray());
+			fos.close();
+
 			shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + filePath));
 			startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.share_string)));			
 			return true;
 		} catch (IOException e) {                       
-		        e.printStackTrace();   
-		        return false;
+			e.printStackTrace();   
+			TextView err = (TextView)this.findViewById(R.id.error_text);
+			err.setText(getResources().getString(R.string.error_sharing) + "\n" + e.getMessage());
+			return false;
 		}
 	}
 

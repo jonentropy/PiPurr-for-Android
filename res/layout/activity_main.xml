@@ -6,14 +6,23 @@
 
     <ImageView
         android:id="@+id/imageView1"
-        android:contentDescription="@string/cat_image_desc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:layout_below="@+id/error_text"
+        android:contentDescription="@string/cat_image_desc"
         android:longClickable="true"
-        android:layout_below="@+id/error_text" />
+        android:onClick="doClick" />
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/error_text"
@@ -21,27 +30,33 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/button2"
+        android:layout_below="@+id/linearLayout1"
         android:paddingLeft="@dimen/bar_pad"
         android:paddingRight="@dimen/bar_pad"
         android:textColor="@color/error_color" />
 
-    <Button
-        android:id="@+id/button2"
+    <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
-        android:onClick="doClick"
-        android:text="@string/get_image" />
+        android:layout_centerHorizontal="true" >
 
-    <ProgressBar
-        android:id="@+id/progressBar1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" 
-        android:visibility="invisible" />
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:onClick="doClick"
+            android:text="@string/get_image" />
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:onClick="doClick"
+            android:text="@string/meow" />
+    </LinearLayout>
 
 </RelativeLayout>
