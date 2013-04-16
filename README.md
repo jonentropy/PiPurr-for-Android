@@ -6,7 +6,9 @@ PiPurr client for Android.
 See PiPurr Server repo for the server.
 
 Features:
-* Share via sharing intent.
+* Get static image of cats.
+* Play meow sound through speakers on server.
+* Share image via sharing intent.
 
 Coming soon:
 * optimise sharing.
