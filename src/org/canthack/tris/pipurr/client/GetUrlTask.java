@@ -2,6 +2,7 @@ package org.canthack.tris.pipurr.client;
 
 import java.io.IOException;
 
+import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.params.BasicHttpParams;
@@ -21,7 +22,8 @@ public class GetUrlTask extends AsyncTask<String, Integer, Void> {
 			HttpConnectionParams.setSoTimeout(params, 60000);   // 1 minute
 			request.setParams(params);
 
-			/*HttpResponse response =*/ httpClient.execute(request);	
+			HttpResponse response = httpClient.execute(request);	
+			response.getEntity().consumeContent();
 			
 		} 
 		catch (IOException e) {
