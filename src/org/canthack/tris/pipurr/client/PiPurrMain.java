@@ -25,6 +25,7 @@ public class PiPurrMain extends Activity {
 	private boolean fullscreen;
 	private View mainLayout;
 	private Button imageButton, meowButton, feedButton;
+	private ImageView catImage;
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -43,7 +44,7 @@ public class PiPurrMain extends Activity {
 				diTask.setImageInView();
 		}
 
-		ImageView catImage = (ImageView)this.findViewById(R.id.imageView1);
+		catImage = (ImageView)this.findViewById(R.id.imageView1);
 
 		catImage.setOnLongClickListener(new OnLongClickListener() { 
 			@Override
@@ -99,7 +100,7 @@ public class PiPurrMain extends Activity {
 
 			break;
 		case R.id.imageView1:
-			toggleFullScreen();
+			if (catImage.getDrawable() != null) toggleFullScreen();
 			break;
 
 		case R.id.button1:
@@ -140,7 +141,7 @@ public class PiPurrMain extends Activity {
 	}
 
 	public boolean doShare(View view){
-		ImageView catView = (ImageView)view;
+		ImageView catView = (ImageView) view;
 		if(catView.getDrawable() == null || diTask.getStatus() != AsyncTask.Status.FINISHED){
 			//no image in the view or asynctask is busy, so makes no sense to share
 			return false;
