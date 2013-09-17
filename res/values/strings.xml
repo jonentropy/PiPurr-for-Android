@@ -4,6 +4,7 @@
     <string name="app_name">PiPurr</string>
     <string name="get_image">What are they up to?</string>
     <string name="meow">Meow!</string>
+    <string name="feed">Feed</string>
     <string name="no_internet">No Internet connection litty!</string>
     <string name="cat_image_desc">Cat Image</string>
     <string name="share_string">"Show people the cats!"</string>

@@ -53,7 +53,8 @@ public class PiPurrMain extends Activity {
 	}
 
 	public void doClick(View view) {
-
+		GetUrlTask ut;
+		
 		switch(view.getId()){
 		case R.id.button2:
 			TextView err = (TextView)this.findViewById(R.id.error_text);
@@ -95,8 +96,13 @@ public class PiPurrMain extends Activity {
 			break;
 
 		case R.id.button1:
-			GetUrlTask ut = new GetUrlTask();
+			ut = new GetUrlTask();
 			ut.execute(getResources().getString(R.string.meow_url));
+			break;
+
+		case R.id.button3:
+			ut = new GetUrlTask();
+			ut.execute(getResources().getString(R.string.feed_url));
 			break;
 		}
 	}

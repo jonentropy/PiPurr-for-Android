@@ -12,7 +12,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/error_text"
+        android:layout_alignParentTop="true"
         android:contentDescription="@string/cat_image_desc"
         android:longClickable="true"
         android:onClick="doClick" />
@@ -58,6 +58,14 @@
             android:layout_marginTop="8dp"
             android:onClick="doClick"
             android:text="@string/meow" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:onClick="doClick"
+            android:text="@string/feed" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -3,5 +3,6 @@
 
     <string name="image_url">your_pipurr_image_url_here</string>
     <string name="meow_url">your_pipurr_meow_url_here</string>
+    <string name="feed_url">your_pipurr_feed_url_here</string>
 
 </resources>
