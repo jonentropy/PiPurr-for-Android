@@ -1,14 +1,10 @@
 package org.canthack.tris.pipurr.client;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -145,35 +141,24 @@ public class PiPurrMain extends Activity {
 
 	public boolean doShare(View view){
 		ImageView catView = (ImageView)view;
-		if(catView.getDrawable() == null){
-			//no image in the view, so makes no sense to share
+		if(catView.getDrawable() == null || diTask.getStatus() != AsyncTask.Status.FINISHED){
+			//no image in the view or asynctask is busy, so makes no sense to share
 			return false;
 		}
-
-		catView.setDrawingCacheEnabled(true);
-		Bitmap catBitmap = (catView.getDrawingCache());
+		
+		//will share the last downloaded image from the server.
 
 		Intent shareIntent = new Intent(Intent.ACTION_SEND);
 		shareIntent.setType("image/jpeg");
 
-		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-		catBitmap.compress(Bitmap.CompressFormat.JPEG, 95, bytes);
-
 		String filePath = getBaseContext().getExternalFilesDir(null) + 
 				File.separator + "The Cats.jpg";
 
-		File f = new File(filePath);
-		try {
-			f.createNewFile();
-			f.deleteOnExit();
-			FileOutputStream fos = new FileOutputStream(f);
-			fos.write(bytes.toByteArray());
-			fos.close();
-
+		try{
 			shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + filePath));
 			startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.share_string)));			
 			return true;
-		} catch (IOException e) {                       
+		} catch (Exception e) {                       
 			e.printStackTrace();   
 			TextView err = (TextView)this.findViewById(R.id.error_text);
 			err.setText(getResources().getString(R.string.error_sharing) + "\n" + e.getMessage());

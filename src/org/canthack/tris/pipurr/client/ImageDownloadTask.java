@@ -1,6 +1,8 @@
 package org.canthack.tris.pipurr.client;
 //Based on Chapter 11 of the book Pro Android 3
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import org.apache.http.HttpResponse;
@@ -47,7 +49,7 @@ public class ImageDownloadTask extends AsyncTask<String, Integer, Bitmap> {
 
 	protected Bitmap doInBackground(String... urls) {
 		Log.v("doInBackground", "doing download of image...");
-		return downloadImage(urls);
+		return downloadAndSaveImage(urls);
 	}
 
 	protected void onProgressUpdate(Integer... progress) {		
@@ -80,7 +82,7 @@ public class ImageDownloadTask extends AsyncTask<String, Integer, Bitmap> {
 		errorMsg.setText(errorMessage);
 	}
 
-	public Bitmap downloadImage(String... urls)
+	public Bitmap downloadAndSaveImage(String... urls)
 	{
 		HttpClient httpClient = CustomHTTPClient.getHttpClient();
 		try {
@@ -98,6 +100,8 @@ public class ImageDownloadTask extends AsyncTask<String, Integer, Bitmap> {
 			byte[] image = EntityUtils.toByteArray(response.getEntity());
 
 			setProgress(75);
+			
+			saveFile(image);
 
 			Bitmap mBitmap = BitmapFactory.decodeByteArray(image, 0, image.length);
 
@@ -113,6 +117,23 @@ public class ImageDownloadTask extends AsyncTask<String, Integer, Bitmap> {
 		}
 		
 		return null;
+	}
+
+	private void saveFile(byte[] image) {
+		String filePath = mContext.getExternalFilesDir(null) + 
+				File.separator + "The Cats.jpg";
+		
+		File f = new File(filePath);
+		try {
+			f.createNewFile();
+			f.deleteOnExit();
+			FileOutputStream fos = new FileOutputStream(f);
+			fos.write(image);
+			fos.close();
+
+		} catch (IOException e) {                       
+			e.printStackTrace();   
+		}
 	}
 
 	private void setProgress(int progress) {
