@@ -5,25 +5,30 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnLongClickListener;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class PiPurrMain extends Activity {
 	private ImageDownloadTask diTask;
+	private boolean fullscreen;
+	private View mainLayout;
+	private Button imageButton, meowButton, feedButton;
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -50,11 +55,16 @@ public class PiPurrMain extends Activity {
 				return doShare(v);
 			}
 		});
+
+		mainLayout = this.findViewById(android.R.id.content).getRootView();
+		imageButton = (Button) this.findViewById(R.id.button2);
+		meowButton = (Button) this.findViewById(R.id.button1);
+		feedButton = (Button) this.findViewById(R.id.button3);
 	}
 
 	public void doClick(View view) {
 		GetUrlTask ut;
-		
+
 		switch(view.getId()){
 		case R.id.button2:
 			TextView err = (TextView)this.findViewById(R.id.error_text);
@@ -93,6 +103,7 @@ public class PiPurrMain extends Activity {
 
 			break;
 		case R.id.imageView1:
+			toggleFullScreen();
 			break;
 
 		case R.id.button1:
@@ -104,6 +115,31 @@ public class PiPurrMain extends Activity {
 			ut = new GetUrlTask();
 			ut.execute(getResources().getString(R.string.feed_url));
 			break;
+		}
+	}
+
+	private void toggleFullScreen(){
+		if(fullscreen){
+			imageButton.setVisibility(View.VISIBLE);
+			meowButton.setVisibility(View.VISIBLE);
+			feedButton.setVisibility(View.VISIBLE);
+
+			getActionBar().show();
+			this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+			mainLayout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);	
+			
+			fullscreen = false;
+		}
+		else{
+			imageButton.setVisibility(View.GONE);
+			meowButton.setVisibility(View.GONE);
+			feedButton.setVisibility(View.GONE);
+
+			mainLayout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
+			getActionBar().hide();
+			getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);	
+			
+			fullscreen = true;
 		}
 	}
 
@@ -157,5 +193,14 @@ public class PiPurrMain extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
+	}
+	
+	public void onBackPressed() {
+		if(fullscreen){
+			toggleFullScreen();
+		}
+		else{
+			super.onBackPressed();
+		}
 	}
 }
