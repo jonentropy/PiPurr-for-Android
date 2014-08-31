@@ -8,10 +8,10 @@ See PiPurr Server repo for the server.
 Features:
 * Get static image of cats.
 * Play meow sound through speakers on server.
+* Feed cat with stepper motor powered feeder.
 * Share image via sharing intent.
 
 Coming soon:
-* optimise sharing.
 * video feed.
 * cat interaction.
 
