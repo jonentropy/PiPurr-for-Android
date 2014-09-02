@@ -18,34 +18,36 @@ import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 
 public class CustomHTTPClient {
-	private static HttpClient customHttpClient;
+    private static HttpClient customHttpClient;
 
-	/** A private Constructor prevents any other class from instantiating. */
-	private CustomHTTPClient() {
-	}
+    /**
+     * A private Constructor prevents any other class from instantiating.
+     */
+    private CustomHTTPClient() {
+    }
 
-	public static synchronized HttpClient getHttpClient() {
-		if (customHttpClient == null) {
-	        HttpParams params = new BasicHttpParams();
-	        HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
-	        HttpProtocolParams.setContentCharset(params, HTTP.DEFAULT_CONTENT_CHARSET);
-	        HttpProtocolParams.setUseExpectContinue(params, true);
-	        
-	        ConnManagerParams.setTimeout(params, 1000);
+    public static synchronized HttpClient getHttpClient() {
+        if (customHttpClient == null) {
+            HttpParams params = new BasicHttpParams();
+            HttpProtocolParams.setVersion(params, HttpVersion.HTTP_1_1);
+            HttpProtocolParams.setContentCharset(params, HTTP.DEFAULT_CONTENT_CHARSET);
+            HttpProtocolParams.setUseExpectContinue(params, true);
 
-	        HttpConnectionParams.setConnectionTimeout(params, 5000);
-	        HttpConnectionParams.setSoTimeout(params, 10000);
-	        
-	        SchemeRegistry schReg = new SchemeRegistry();
-	        schReg.register(new Scheme("http", 
-	                        PlainSocketFactory.getSocketFactory(), 80));
-	        schReg.register(new Scheme("https", 
-	                        SSLSocketFactory.getSocketFactory(), 443));
-	        ClientConnectionManager conMgr = new 
-	                        ThreadSafeClientConnManager(params,schReg);
-	        
-	        customHttpClient = new DefaultHttpClient(conMgr, params);
-		}
-		return customHttpClient;
-	}
+            ConnManagerParams.setTimeout(params, 1000);
+
+            HttpConnectionParams.setConnectionTimeout(params, 5000);
+            HttpConnectionParams.setSoTimeout(params, 10000);
+
+            SchemeRegistry schReg = new SchemeRegistry();
+            schReg.register(new Scheme("http",
+                    PlainSocketFactory.getSocketFactory(), 80));
+            schReg.register(new Scheme("https",
+                    SSLSocketFactory.getSocketFactory(), 443));
+            ClientConnectionManager conMgr = new
+                    ThreadSafeClientConnManager(params, schReg);
+
+            customHttpClient = new DefaultHttpClient(conMgr, params);
+        }
+        return customHttpClient;
+    }
 }

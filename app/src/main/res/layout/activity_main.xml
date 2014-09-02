@@ -52,7 +52,7 @@
             android:text="@string/get_image" />
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/btnMeow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -60,7 +60,7 @@
             android:text="@string/meow" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btnFeed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
