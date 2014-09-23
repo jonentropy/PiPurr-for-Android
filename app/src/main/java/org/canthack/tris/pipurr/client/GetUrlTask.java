@@ -48,5 +48,4 @@ public class GetUrlTask extends AsyncTask<String, Integer, Void> {
         }
     }
 
-
 }
