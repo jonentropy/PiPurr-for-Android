@@ -116,13 +116,17 @@ public class ImageDownloadTask extends AsyncTask<String, Integer, Bitmap> {
     }
 
     private boolean saveFile(byte[] image) {
+
         String filePath = mContext.getExternalFilesDir(null) +
                 File.separator + "The Cats.jpg";
 
         File f = new File(filePath);
         try {
-            if (!f.createNewFile()) return false;
-            f.deleteOnExit();
+            f.delete();
+            if (!f.createNewFile()) {
+                Log.e("PiPurr", "Could not save file");
+                return false;
+            }
             FileOutputStream fos = new FileOutputStream(f);
             fos.write(image);
             fos.close();

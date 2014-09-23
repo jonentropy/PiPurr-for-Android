@@ -12,8 +12,6 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
-import java.io.IOException;
-
 public class GetUrlTask extends AsyncTask<String, Integer, Void> {
     private Context context;
     private boolean success;
