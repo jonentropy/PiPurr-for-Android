@@ -1,6 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            storeFile file('/Users/tristan/Development/androidkeystore')
+        }
+    }
+
     compileSdkVersion 20
     buildToolsVersion "20.0.0"
 
