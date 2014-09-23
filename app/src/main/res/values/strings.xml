@@ -10,5 +10,9 @@
     <string name="share_string">Show people the cats!</string>
     <string name="error_sharing">Couldn\'t share the cats. :(</string>
     <string name="error_connecting">Error connecting to PiPurr server.</string>
+    <string name="http">http://</string>
+    <string name="settings_title">PiPurr Settings</string>
+    <string name="settings_menu">Settings</string>
+    <string name="location_title">PiPurr Server Location</string>
 
 </resources>

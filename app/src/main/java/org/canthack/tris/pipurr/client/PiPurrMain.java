@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.WindowManager;
@@ -88,7 +89,7 @@ public class PiPurrMain extends Activity {
                     diTask = new ImageDownloadTask(this);
 
                     try {
-                        diTask.execute(getResources().getString(R.string.image_url));
+                        diTask.execute(Settings.getLocation(this) + "/cats.jpeg");
                     } catch (Exception e) {
                         e.printStackTrace();
                         err.setText(e.getMessage());
@@ -103,13 +104,13 @@ public class PiPurrMain extends Activity {
             case R.id.btnMeow:
                 ut = new GetUrlTask();
                 ut.setContext(getApplicationContext());
-                ut.execute(getResources().getString(R.string.meow_url));
+                ut.execute(Settings.getLocation(this) + "/sound");
                 break;
 
             case R.id.btnFeed:
                 ut = new GetUrlTask();
                 ut.setContext(getApplicationContext());
-                ut.execute(getResources().getString(R.string.feed_url));
+                ut.execute(Settings.getLocation(this) + "/feed");
                 break;
         }
     }
@@ -177,6 +178,19 @@ public class PiPurrMain extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
+    }
+
+    //Handles menu clicks
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_settings:
+                startActivity(new Intent(this, Settings.class));
+                return true;
+            default:
+                break;
+        }
+        return false;
     }
 
     @Override

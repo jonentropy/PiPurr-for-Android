@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:title="@string/settings_title">
+
+    <EditTextPreference
+        android:defaultValue="@string/http"
+        android:dialogTitle="@string/location_title"
+        android:inputType="textNoSuggestions|textUri"
+        android:key="@string/location_pref_key"
+        android:title="@string/location_title" />
+
+</PreferenceScreen>

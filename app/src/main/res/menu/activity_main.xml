@@ -4,6 +4,6 @@
         android:id="@+id/menu_settings"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="Not one..."/>
+        android:title="@string/settings_menu"/>
 
 </menu>

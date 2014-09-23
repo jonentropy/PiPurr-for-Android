@@ -106,7 +106,7 @@ public class ImageDownloadTask extends AsyncTask<String, Integer, Bitmap> {
 
             return mBitmap;
 
-        } catch (IOException | IllegalStateException e) {
+        } catch (Exception e) {
             Log.e("ImageDownloadTask", "Error downloading image", e);
             lastError = e.getMessage() + ".";
             setProgress(-1);

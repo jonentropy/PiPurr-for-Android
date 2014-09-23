@@ -35,7 +35,7 @@ public class GetUrlTask extends AsyncTask<String, Integer, Void> {
             response.getEntity().consumeContent();
             success = true;
 
-        } catch (IOException | IllegalStateException e) {
+        } catch (Exception e) {
             Log.e("GetUrlTask", "Error getting URL", e);
         }
 
