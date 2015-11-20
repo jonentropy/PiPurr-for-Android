@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId "org.canthack.tris.pipurr.client"
         minSdkVersion 14
-        targetSdkVersion 21
+        targetSdkVersion 23
     }
 
     buildTypes {

@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -146,24 +147,20 @@ public class PiPurrMain extends Activity {
             return false;
         }
 
-        //will share the last downloaded image from the server.
-
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("image/jpeg");
-
         String filePath = getBaseContext().getExternalFilesDir(null) +
                 File.separator + "The Cats.jpg";
 
-        try {
-            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + filePath));
-            startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.share_string)));
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            TextView err = (TextView) this.findViewById(R.id.error_text);
-            err.setText(getResources().getString(R.string.error_sharing) + "\n" + e.getMessage());
-            return false;
-        }
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("image/*");
+        Uri fileUri = FileProvider.getUriForFile(this, "org.canthack.tris.pipurr.client.catprovider", new File(filePath));
+
+        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+
+        startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.share_string)));
+
+        return true;
+
     }
 
     // This gets called before onDestroy(). We want to pass forward a reference
