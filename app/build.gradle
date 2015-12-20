@@ -1,14 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    useLibrary 'org.apache.http.legacy'
+
     signingConfigs {
-        config {
-            storeFile file('/Users/tristan/Development/androidkeystore')
+        release {
+            storeFile file("/Users/tristan/Development/androidkeystore")
         }
     }
 
-    compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
 
     defaultConfig {
         applicationId "org.canthack.tris.pipurr.client"
@@ -18,6 +20,8 @@ android {
 
     buildTypes {
         release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
@@ -28,5 +32,5 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.android.support:support-v4:23.1.1'
 }
