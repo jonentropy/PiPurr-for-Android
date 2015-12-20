@@ -52,6 +52,14 @@
             android:text="@string/get_image" />
 
         <Button
+            android:id="@+id/detectedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:onClick="doClick"
+            android:text="@string/get_detected" />
+
+        <Button
             android:id="@+id/btnMeow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

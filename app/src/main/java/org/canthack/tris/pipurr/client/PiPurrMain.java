@@ -64,6 +64,7 @@ public class PiPurrMain extends Activity {
         GetUrlTask ut;
 
         switch (view.getId()) {
+            case R.id.detectedButton:
             case R.id.button2:
                 TextView err = (TextView) this.findViewById(R.id.error_text);
                 err.setText("");
@@ -90,7 +91,8 @@ public class PiPurrMain extends Activity {
                     diTask = new ImageDownloadTask(this);
 
                     try {
-                        diTask.execute(Settings.getLocation(this) + "/cats.jpeg");
+                        String imageFilename = view.getId() == R.id.detectedButton ? "/pir.jpeg" : "/cats.jpeg";
+                        diTask.execute(Settings.getLocation(this) + imageFilename);
                     } catch (Exception e) {
                         e.printStackTrace();
                         err.setText(e.getMessage());
