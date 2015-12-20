@@ -26,7 +26,7 @@ public class PiPurrMain extends Activity {
     private ImageDownloadTask diTask;
     private boolean fullscreen;
     private View mainLayout;
-    private Button imageButton, meowButton, feedButton;
+    private Button imageButton, meowButton, feedButton, detectedButton;
     private ImageView catImage;
 
     @SuppressWarnings("deprecation")
@@ -58,6 +58,7 @@ public class PiPurrMain extends Activity {
         imageButton = (Button) this.findViewById(R.id.button2);
         meowButton = (Button) this.findViewById(R.id.btnMeow);
         feedButton = (Button) this.findViewById(R.id.btnFeed);
+        detectedButton = (Button) this.findViewById(R.id.detectedButton);
     }
 
     public void doClick(View view) {
@@ -123,6 +124,7 @@ public class PiPurrMain extends Activity {
             imageButton.setVisibility(View.VISIBLE);
             meowButton.setVisibility(View.VISIBLE);
             feedButton.setVisibility(View.VISIBLE);
+            detectedButton.setVisibility(View.VISIBLE);
 
             getActionBar().show();
             this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -133,6 +135,7 @@ public class PiPurrMain extends Activity {
             imageButton.setVisibility(View.GONE);
             meowButton.setVisibility(View.GONE);
             feedButton.setVisibility(View.GONE);
+            detectedButton.setVisibility(View.GONE);
 
             mainLayout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE);
             getActionBar().hide();
